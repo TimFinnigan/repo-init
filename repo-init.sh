@@ -6,20 +6,24 @@ set -e
 # Get GitHub username dynamically
 GITHUB_USER=$(gh api user | jq -r .login)
 
-# Default repository visibility
-VISIBILITY="--private"
+# Prompt the user for repository visibility
+while true; do
+  echo "Enter repository visibility (public/private):"
+  read VISIBILITY
 
-# Check if the user provided --public as an argument
-if [[ "$1" == "--public" ]]; then
-  VISIBILITY="--public"
-fi
+  if [[ "$VISIBILITY" == "public" || "$VISIBILITY" == "private" ]]; then
+    break
+  else
+    echo "❌ Invalid input! Please enter 'public' or 'private'."
+  fi
+done
 
 # Prompt for repository name
 echo "Enter the repository name:"
 read REPO_NAME
 
 # Create the repository with the chosen visibility
-gh repo create "$REPO_NAME" $VISIBILITY
+gh repo create "$REPO_NAME" --"$VISIBILITY"
 
 # Navigate into the repository (create directory if needed)
 mkdir "$REPO_NAME"
@@ -47,4 +51,4 @@ git commit --allow-empty -m "Initial develop commit"
 # Push develop branch
 git push --set-upstream origin develop
 
-echo "✅ Repository '$REPO_NAME' created as ${VISIBILITY/--/} and both 'main' and 'develop' branches pushed!"
+echo "✅ Repository '$REPO_NAME' created as '$VISIBILITY' and both 'main' and 'develop' branches pushed!"

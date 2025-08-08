@@ -14,14 +14,31 @@ This script automates the process of creating a **GitHub repository**, setting u
 
 ### ⚡ **Usage**  
 
-#### ✅ **Step 1: Make the Script Executable**  
+#### 🍎 **Mac Users - Easy Method**  
+For Mac users, you can use the `.command` file for easier execution:
+
+1. **Rename the script** (or use the provided `repo-init.command` file):
+   ```sh
+   cp repo-init.sh repo-init.command
+   ```
+
+2. **Make it executable**:
+   ```sh
+   chmod +x repo-init.command
+   ```
+
+3. **Drag to Dock** and click to run, or **double-click** in Finder!
+
+#### ✅ **Alternative Method - Command Line**  
+
+**Step 1: Make the Script Executable**  
 ```sh
-chmod +x repo_init.sh
+chmod +x repo-init.sh
 ```
 
-#### 🌍 **Step 2: Run the Script**  
+**Step 2: Run the Script**  
 ```sh
-./repo_init.sh
+./repo-init.sh
 ```
 
 #### 🖊 **Step 3: Follow the Prompts**  

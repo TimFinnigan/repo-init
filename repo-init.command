@@ -52,3 +52,5 @@ git commit --allow-empty -m "Initial develop commit"
 git push --set-upstream origin develop
 
 echo "✅ Repository '$REPO_NAME' created as '$VISIBILITY' and both 'main' and 'develop' branches pushed!"
+
+cur

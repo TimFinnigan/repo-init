@@ -48,3 +48,28 @@ echo "📁 Repository cloned to: $GITHUB_DIR/$REPO_NAME"
 # Open the repository in Cursor (staying on develop branch)
 echo "🚀 Opening repository in Cursor..."
 cursor "$GITHUB_DIR/$REPO_NAME"
+
+echo ""
+echo "✨ Repository setup complete! Cursor should now be open with your new repository."
+echo ""
+
+# Countdown timer with abort option
+echo ""
+echo "🎉 All done! Your repository is ready and open in Cursor."
+echo ""
+echo "Closing terminal in 5 seconds... (Press Ctrl+C to abort)"
+
+# Simple countdown with sleep - user can press Ctrl+C to abort
+for i in 5 4 3 2 1; do
+    echo -n "$i... "
+    sleep 1
+done
+
+echo ""
+echo "Goodbye! 👋"
+
+# Close the terminal window without warning by running AppleScript in background and exiting
+nohup sh -c 'sleep 0.5; osascript -e "tell application \"Terminal\" to close (every window whose name contains \"repo-init\")" 2>/dev/null' >/dev/null 2>&1 &
+
+# Exit the script cleanly
+exit 0

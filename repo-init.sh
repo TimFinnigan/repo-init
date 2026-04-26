@@ -23,8 +23,19 @@ mkdir -p "$GITHUB_DIR"
 # Navigate to the GitHub directory
 cd "$GITHUB_DIR"
 
-# Clone the repository
-git clone "https://github.com/$GITHUB_USER/$REPO_NAME.git"
+# Wait for GitHub to finish provisioning (race condition after create)
+echo "Waiting for repository to become available..."
+for attempt in 1 2 3 4 5; do
+    if git clone "https://github.com/$GITHUB_USER/$REPO_NAME.git" 2>/dev/null; then
+        break
+    fi
+    if [ "$attempt" -eq 5 ]; then
+        echo "❌ Could not clone repository after 5 attempts."
+        exit 1
+    fi
+    echo "  Not ready yet, retrying in 3 seconds... (attempt $attempt/5)"
+    sleep 3
+done
 
 # Navigate into the cloned repository
 cd "$REPO_NAME"
